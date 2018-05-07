@@ -78,7 +78,7 @@
                     v-model="newAddress.location">
                 </div>
               </div>
-              <button :click="createNewAddress" type="button" class="btn btn-primary btn-block"
+              <button @click="createNewAddress" type="button" class="btn btn-primary btn-block"
                 :disabled="errors.any()">Create</button>
             </form>
 

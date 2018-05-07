@@ -1,0 +1,8 @@
+---
+applications:
+- name: clco
+  domain: scapp.swisscom.com
+  host: clco
+  memory: 64MB
+  instances: 1
+  buildpack: staticfile_buildpack
