@@ -1,0 +1,118 @@
+<div class="address">
+  <h1 class="text-center">{{ $t('app.title') }}</h1>
+
+  <h2 class="text-center">Addresses</h2>
+
+  <div class="container">
+
+    <div class="accordion" id="accordionExample">
+
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Create new Address
+            </button>
+          </h5>
+        </div>
+
+        <div id="collapseOne" class="collapse border-bottom" ref="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card-body">
+            <form>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="firstName">First name</label>
+                  <input id="firstName"
+                    name="firstName"
+                    placeholder="First name"
+                    :class="{'form-control': true, 'is-invalid': errors.has('firstName') }"
+                    type="text"
+                    :data-vv-as="'First name'"
+                    v-validate="'required|min:3'"
+                    v-model="newAddress.firstName">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="lastName">Last name</label>
+                  <input id="lastName"
+                    name="lastName"
+                    placeholder="Last name"
+                    :class="{'form-control': true, 'is-invalid': errors.has('lastName') }"
+                    type="text"
+                    :data-vv-as="'Last name'"
+                    v-validate="'required|min:3'"
+                    v-model="newAddress.lastName">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">E-Mail</label>
+                <input id="email"
+                  name="email"
+                  placeholder="john.smith@example.com"
+                  :class="{'form-control': true, 'is-invalid': errors.has('email') }"
+                  type="email"
+                  :data-vv-as="'Email'"
+                  v-validate="'required|email'"
+                  v-model="newAddress.email">
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="zipCode">Zip code</label>
+                  <input id="zipCode"
+                    name="zipCode"
+                    placeholder="4054"
+                    :class="{'form-control': true, 'is-invalid': errors.has('zipCode') }"
+                    type="text"
+                    :data-vv-as="'Zip code'"
+                    v-validate="'required|min:3'"
+                    v-model="newAddress.zipCode">
+                </div>
+                <div class="form-group col-md-8">
+                  <label for="location">Location</label>
+                  <input id="location"
+                    name="location"
+                    placeholder="Basel"
+                    :class="{'form-control': true, 'is-invalid': errors.has('location') }"
+                    type="text"
+                    :data-vv-as="'Location'"
+                    v-validate="'required|min:3'"
+                    v-model="newAddress.location">
+                </div>
+              </div>
+              <button :click="createNewAddress" type="button" class="btn btn-primary btn-block"
+                :disabled="errors.any()">Create</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br/>
+
+    <table class="table table-striped table-bordered">
+      <caption>List of Addresses</caption>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First name</th>
+          <th scope="col">Last name</th>
+          <th scope="col">E-Mail</th>
+          <th scope="col">Location</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="address in addresses">
+          <th scope="row">{{ address.id }}</th>
+          <td>{{ address.firstName }}</td>
+          <td>{{ address.lastName }}</td>
+          <td>{{ address.email }}</td>
+          <td>{{ address.getFullLocation() }}</td>
+          <td><button type="button" class="btn btn-danger" @click="onDeleteAddress(address)">Löschen</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
